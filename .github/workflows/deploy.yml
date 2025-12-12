@@ -1,0 +1,18 @@
+name: Deploy (CD Sample)
+
+on:
+  workflow_run:
+    workflows: ["Python CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dummy deploy step
+        run: |
+          echo "ここで本来はデプロイ処理を実行します。"
+          echo "例：Render/Railway の Deploy Hook を叩く、S3へアップロードする、など"
